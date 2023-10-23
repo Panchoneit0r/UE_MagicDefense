@@ -2,6 +2,7 @@
 
 
 #include "PawnTurret.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 APawnTurret::APawnTurret()
@@ -9,6 +10,9 @@ APawnTurret::APawnTurret()
 
 	Slot = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SlotCompoent"));
 	SetRootComponent(Slot);
+
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetupAttachment(RootComponent);
 	
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -21,6 +25,7 @@ void APawnTurret::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
 
 // Called every frame
 void APawnTurret::Tick(float DeltaTime)

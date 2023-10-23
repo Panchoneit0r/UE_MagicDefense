@@ -44,9 +44,15 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
-	TSubclassOf<AActor> TurretClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawner")
+	float Money;
 
-	TSubclassOf<class AActor> GetTurret() const {return TurretClass;}
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawner")
+	TSubclassOf<APawnTurret> TurretClass;
+
+	TSubclassOf<class APawnTurret> GetTurret() const {return TurretClass;}
+
+	UFUNCTION(BlueprintCallable, Category="Spawner")
+	void SetTurret(TSubclassOf<class APawnTurret> turret);
 	
 };

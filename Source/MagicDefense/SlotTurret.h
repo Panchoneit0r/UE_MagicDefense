@@ -58,7 +58,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Master")
 	void SetMaster(APlayerMaster* masterValue);
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly,  meta = (AllowPrivateAccess = "true"))
 	class APawnTurret* Turret;
 };
