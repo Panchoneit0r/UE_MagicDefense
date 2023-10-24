@@ -20,6 +20,7 @@ void AEnemmieDummy::OnRep_CurrentHealth()
  
  void AEnemmieDummy::OnHealthUpdate()
 {
+	/*
 	//Client-specific functionality
 	if (IsLocallyControlled())
 	{
@@ -33,6 +34,7 @@ void AEnemmieDummy::OnRep_CurrentHealth()
 
 		}
 	}
+	*/
 
 	//Server-specific functionality
 	if (GetLocalRole() == ROLE_Authority)
@@ -54,6 +56,12 @@ AEnemmieDummy::AEnemmieDummy()
 
 	MaxHealth = 100.0f;
 	CurrentHealth = MaxHealth;
+	RootDummyComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	SetRootComponent(RootDummyComponent); 
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCompoent"));
+	SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMeshCompoent"));
+	CapsuleComponent->SetupAttachment(RootComponent);
+	SkeletalMeshComponent->SetupAttachment(CapsuleComponent);
 }
 
 // Called when the game starts or when spawned

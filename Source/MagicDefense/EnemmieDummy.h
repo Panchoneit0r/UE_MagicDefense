@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/Actor.h"
 #include "EnemmieDummy.generated.h"
 
 UCLASS()
-class MAGICDEFENSE_API AEnemmieDummy : public ACharacter
+class MAGICDEFENSE_API AEnemmieDummy : public AActor
 {
 	GENERATED_BODY()
 
@@ -16,6 +17,13 @@ public:
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	// Sets default values for this actor's properties
 	AEnemmieDummy();
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UCapsuleComponent * CapsuleComponent;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	USkeletalMeshComponent * SkeletalMeshComponent;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	USceneComponent * RootDummyComponent;
 
 protected:
 	// Called when the game starts or when spawned
