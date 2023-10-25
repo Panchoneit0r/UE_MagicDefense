@@ -55,29 +55,35 @@ void ASlotTurret::OnEndMouseOver(UPrimitiveComponent* TouchedComponent)
 
 void ASlotTurret::OnClickedMouse(UPrimitiveComponent* TouchedComponent, FKey ButtonPresed)
 {
+		UWorld* World = GetWorld();
+		FVector spawnLocation = Base->GetComponentLocation();
+		FRotator spawnRotation =Base->GetComponentRotation();
+
+		FActorSpawnParameters spawnParameters;
+		spawnParameters.Instigator = GetInstigator();
+		spawnParameters.Owner = this;
 	
-	UWorld* World = GetWorld();
-	FVector spawnLocation = Base->GetComponentLocation();
-	FRotator spawnRotation =Base->GetComponentRotation();
+		Turret = World->SpawnActor<APawnTurret>(GetMaster()->GetTurret(),spawnLocation, spawnRotation, spawnParameters );
 
-	FActorSpawnParameters spawnParameters;
-	spawnParameters.Instigator = GetInstigator();
-	spawnParameters.Owner = this;
+		if( Turret->CostMoney > Master->Money )
+		{
+			Turret->Destroy();
+			Turret = nullptr;
+		}
+		else
+		{
+			Master->Money -= Turret->CostMoney;
+			Slot->SetMaterial(0, UsedMaterial);
+			Used = true;
+		}
 	
-	Turret = World->SpawnActor<APawnTurret>(GetMaster()->GetTurret(),spawnLocation, spawnRotation, spawnParameters );
-
-	if( Turret->CostMoney > Master->Money )
+/*
+	if(Turret )
 	{
-		Turret->Destroy();
-		Turret = nullptr;
+		Master->Money -= Turret->CostMoney/2;
+		Turret->SetDesiadia(0.0f);
 	}
-	else
-	{
-		Master->Money -= Turret->CostMoney;
-		Slot->SetMaterial(0, UsedMaterial);
-		Used = true;
-	}
-
+*/
 	
 }
 

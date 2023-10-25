@@ -21,11 +21,11 @@ class MAGICDEFENSE_API APawnTurret : public APawn
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UArrowComponent* FirePoint;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UAnimMontage* AttackAnimation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UAnimMontage* AngryAnimation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class UAnimMontage* AngryAtackAnimation;
 
 public:
 	// Sets default values for this pawn's properties
@@ -43,26 +43,26 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Cosas")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Golem")
 	float CostMoney;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawner")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Golem")
 	TSubclassOf<ATurretProjectile> ProjectileClass;
 
 	TSubclassOf<class ATurretProjectile> GetTurret() const {return ProjectileClass;}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Cosas")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Golem")
 	float Desidia;
 
 	/** Getter for Current Health.*/
-	UFUNCTION(BlueprintPure, Category="Health")
+	UFUNCTION(BlueprintPure, Category="Golem")
 	FORCEINLINE float GetDesidia() const { return Desidia; }
 
 	/** Setter for Current Health. Clamps the value between 0 and MaxHealth and calls OnHealthUpdate. Should only be called on the server.*/
-	UFUNCTION(BlueprintCallable, Category="Health")
+	UFUNCTION(BlueprintCallable, Category="Golem")
 	void SetDesiadia(float NewDesidia);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Cosas")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Golem")
 	bool used;
 
 	UFUNCTION(BlueprintCallable)

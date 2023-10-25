@@ -10,14 +10,15 @@
 APawnTurret::APawnTurret()
 {
 
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	SetRootComponent(CollisionBox);
+	
 	Golem = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Golem"));
-	SetRootComponent(Golem);
+	Golem->SetupAttachment(RootComponent);
 
 	FirePoint = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowCompoent"));
-	FirePoint->SetupAttachment(RootComponent);
+	FirePoint->SetupAttachment(Golem);
 	
-	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
-	CollisionBox->SetupAttachment(RootComponent);
 
 	bReplicates = true;
 	
@@ -55,8 +56,7 @@ void APawnTurret::SetDesiadia(float NewDesidia)
 
 void APawnTurret::Attack()
 {
-	
-	//Golem()->Montage_Play(AttackAnimation, 1.0f);
+	Golem->GetAnimInstance()->Montage_Play(AttackAnimation, 1.0f);
 
 	UWorld* World = GetWorld();
 	FVector spawnLocation = FirePoint->GetComponentLocation();
@@ -66,11 +66,22 @@ void APawnTurret::Attack()
 	spawnParameters.Instigator = GetInstigator();
 	spawnParameters.Owner = this;
 	
-	World->SpawnActor<APawnTurret>(ProjectileClass,spawnLocation, spawnRotation, spawnParameters );
+	World->SpawnActor<ATurretProjectile>(ProjectileClass,spawnLocation, spawnRotation, spawnParameters );
+	
 }
 
 void APawnTurret::Angry()
 {
-	//Golem()->Montage_Play(AngryAnimation, 1.0f);
+	Golem->GetAnimInstance()->Montage_Play(AttackAnimation, 1.0f);
+
+	UWorld* World = GetWorld();
+	FVector spawnLocation = FirePoint->GetComponentLocation();
+	FRotator spawnRotation =FirePoint->GetComponentRotation();
+
+	FActorSpawnParameters spawnParameters;
+	spawnParameters.Instigator = GetInstigator();
+	spawnParameters.Owner = this;
+	
+	World->SpawnActor<ATurretProjectile>(ProjectileClass,spawnLocation, spawnRotation, spawnParameters );
 }
 
