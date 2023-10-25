@@ -13,10 +13,19 @@ class MAGICDEFENSE_API APawnTurret : public APawn
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* Slot;
+	class USkeletalMeshComponent* Golem;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent* CollisionBox;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UArrowComponent* FirePoint;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class UAnimMontage* AttackAnimation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UAnimMontage* AngryAnimation;
 
 public:
 	// Sets default values for this pawn's properties
@@ -45,8 +54,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Cosas")
 	float Desidia;
 
+	/** Getter for Current Health.*/
+	UFUNCTION(BlueprintPure, Category="Health")
+	FORCEINLINE float GetDesidia() const { return Desidia; }
+
+	/** Setter for Current Health. Clamps the value between 0 and MaxHealth and calls OnHealthUpdate. Should only be called on the server.*/
+	UFUNCTION(BlueprintCallable, Category="Health")
+	void SetDesiadia(float NewDesidia);
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Cosas")
 	bool used;
+
+	UFUNCTION(BlueprintCallable)
+	void Attack();
+
+	UFUNCTION(BlueprintCallable)
+	void Angry();
 
 	
 };

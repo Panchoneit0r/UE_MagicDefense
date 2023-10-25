@@ -15,6 +15,8 @@ ATurretProjectile::ATurretProjectile()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	bReplicates = true;
+
 	//Definition for the SphereComponent that will serve as the Root component for the projectile and its collision.
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
 	SphereComponent->InitSphereRadius(37.5f);
