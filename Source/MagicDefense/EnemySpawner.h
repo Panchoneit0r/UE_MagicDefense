@@ -17,7 +17,7 @@ public:
 	AEnemySpawner();
 
 	UPROPERTY(EditAnywhere, Category = "Spawning")
-	TSubclassOf<AEnemmieDummy> EnemyClass;
+	TSubclassOf<AActor> EnemyClass;
 
 	UPROPERTY(EditAnywhere, Category = "Spawning")
 	float SpawnInterval;

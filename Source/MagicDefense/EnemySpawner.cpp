@@ -32,6 +32,11 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::PreparationForHorde()
 {
+	//***************************PANCHO***************************************************************************
+	/*
+	 * Aqui se debe de poner el codigo para que el jugador pueda prepararse para la siguiente horda
+	 * con algun tipo de condicion ya sea boton o tecla oprimida, pero es para que el master pueda decidir si empezar la siguiente ronda
+	 */
 	CurrentSpawnCount = 0;
 	//if (IsPressed('n'))
 	//{
