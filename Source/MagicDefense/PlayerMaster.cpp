@@ -48,6 +48,11 @@ void APlayerMaster::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 }
 
+void APlayerMaster::SetMoney(float newMoney)
+{
+	Money = newMoney;
+}
+
 void APlayerMaster::SetTurret(TSubclassOf<APawnTurret> turret)
 {
 	TurretClass = turret;

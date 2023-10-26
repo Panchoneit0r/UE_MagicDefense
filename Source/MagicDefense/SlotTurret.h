@@ -61,6 +61,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly,  meta = (AllowPrivateAccess = "true"))
 	class APawnTurret* Turret;
+
+	UFUNCTION(BlueprintCallable, Category="Master")
+	void Recharge();
 };
 
 

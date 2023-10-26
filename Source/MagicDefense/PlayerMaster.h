@@ -47,6 +47,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawner")
 	float Money;
 
+	UFUNCTION(BlueprintPure, Category="Master")
+	FORCEINLINE float GetMoney() const{return Money;}
+	
+	UFUNCTION(BlueprintCallable, Category="Spawner")
+	void SetMoney(float newMoney);
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawner")
 	TSubclassOf<APawnTurret> TurretClass;
 

@@ -55,6 +55,8 @@ void ASlotTurret::OnEndMouseOver(UPrimitiveComponent* TouchedComponent)
 
 void ASlotTurret::OnClickedMouse(UPrimitiveComponent* TouchedComponent, FKey ButtonPresed)
 {
+	if(!Used)
+	{
 		UWorld* World = GetWorld();
 		FVector spawnLocation = Base->GetComponentLocation();
 		FRotator spawnRotation =Base->GetComponentRotation();
@@ -76,7 +78,7 @@ void ASlotTurret::OnClickedMouse(UPrimitiveComponent* TouchedComponent, FKey But
 			Slot->SetMaterial(0, UsedMaterial);
 			Used = true;
 		}
-	
+	}	
 /*
 	if(Turret )
 	{
@@ -99,5 +101,11 @@ void ASlotTurret::Tick(float DeltaTime)
 void ASlotTurret::SetMaster(APlayerMaster*  masterValue)
 {
 	Master = masterValue;
+}
+
+void ASlotTurret::Recharge()
+{
+	Master->Money -= Turret->CostMoney/2;
+	Turret->SetDesiadia(0.0f);
 }
 
